@@ -1,12 +1,13 @@
-import {Container, Box, Typography, Button} from '@mui/material';
+import {Container, Box, Typography, Button, Link} from '@mui/material';
 import HeroLayout from './HeroLayout';
+import NextLink from  'next/link';
 
 const Hero = () => {
   return (
     <HeroLayout
       sxBackground={{
         backgroundImage: `url("/background.jpeg")`,
-        backgroundColor: '#cyan',
+        backgroundColor: 'cyan',
         backgroundPosition: 'center',
       }}
     >
@@ -17,23 +18,20 @@ const Hero = () => {
         color="inherit"
         align="center"
         variant="h5"
-        sx={{ mb: 4, mt: { xs: 4, sm: 10 } }}
+        sx={{ mb: 4, mt: { xs: 2, sm: 4 } }}
       >
         Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
       </Typography>
+      <NextLink href="/dashboard">
       <Button
-        color="secondary"
+        color="primary"
         variant="contained"
         size="large"
-        component="a"
-        href="/premium-themes/onepirate/sign-up/"
         sx={{ minWidth: 200 }}
       >
-        Register
+        Join Now
       </Button>
-      <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-        Discover the experience
-      </Typography>
+      </NextLink>
     </HeroLayout>
   );
 }
