@@ -1,5 +1,4 @@
-import { styled } from '@mui/material/styles';
-import {Container, Box} from '@mui/material';
+import {Container, Box, styled} from '@mui/joy';
 
 const HeroLayoutRoot = styled('section')(({ theme }) => ({
   color: theme.palette.common.white,
@@ -7,8 +6,8 @@ const HeroLayoutRoot = styled('section')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   [theme.breakpoints.up('sm')]: {
-    height: '80vh',
-    minHeight: 500,
+    height: '50vh',
+    minHeight: 300,
     maxHeight: 1300,
   },
 }));

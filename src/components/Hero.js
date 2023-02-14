@@ -1,4 +1,4 @@
-import {Container, Box, Typography, Button, Link} from '@mui/material';
+import {Container, Box, Typography, Button, Link} from '@mui/joy';
 import HeroLayout from './HeroLayout';
 import NextLink from  'next/link';
 
@@ -11,23 +11,23 @@ const Hero = () => {
         backgroundPosition: 'center',
       }}
     >
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+      <Typography color="inherit" align="center" level="h1" marked="center">
+        IPSUM
       </Typography>
       <Typography
         color="inherit"
         align="center"
-        variant="h5"
+        level="h4"
         sx={{ mb: 4, mt: { xs: 2, sm: 4 } }}
       >
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        Something something food app platform thing
       </Typography>
       <NextLink href="/dashboard">
       <Button
         color="primary"
-        variant="contained"
-        size="large"
-        sx={{ minWidth: 200 }}
+        variant="solid"
+        size="lg"
+        sx={{ minWidth: 150 }}
       >
         Join Now
       </Button>

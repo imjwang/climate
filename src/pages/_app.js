@@ -1,9 +1,14 @@
 import { FirestoreProvider } from "@/context/firestoreStore"
+import { CssBaseline, CssVarsProvider } from "@mui/joy"
+import '@fontsource/public-sans';
 
 export default function App({ Component, pageProps }) {
   return (
-    <FirestoreProvider>
-      <Component {...pageProps} />
+    <CssVarsProvider>
+      <CssBaseline />
+        <FirestoreProvider>
+    <Component {...pageProps} />
     </FirestoreProvider>
+      </CssVarsProvider>
   )
 }
