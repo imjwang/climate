@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Hero from '@/components/Hero'
+import TripleIcon from '@/components/TripleIcon'
 
 export default function Home() {
   return (
@@ -13,6 +13,7 @@ export default function Home() {
       </Head>
       <main>
         <Hero />
+        <TripleIcon />
       </main>
     </>
   )

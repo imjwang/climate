@@ -12,7 +12,7 @@ const Hero = () => {
       }}
     >
       <Typography color="inherit" align="center" level="h1" marked="center">
-        IPSUM
+        Oṣadhi
       </Typography>
       <Typography
         color="inherit"
