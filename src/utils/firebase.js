@@ -30,9 +30,9 @@ export const firestore = getFirestore(app);
 export const storage = getStorage(app);
 
 //Example
-export async function getUserWithUsername(username) {
+export async function getUser(id) {
   const usersRef = collection(firestore, 'users');
-  const q = query(usersRef, where('username', '==', username), limit(1));
+  const q = query(usersRef, where('id', '==', id), limit(1));
   const querySnapshot = await getDocs(q);
   const userDoc = querySnapshot.docs[0];
   return userDoc;

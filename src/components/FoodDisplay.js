@@ -1,4 +1,4 @@
-import { Sheet } from "@mui/joy"
+import { Sheet, Stack } from "@mui/joy"
 import FoodItem from "@/components/FoodItem"
 
 
@@ -17,9 +17,27 @@ const FoodDisplay = () => {
         color: 'black'
       }}
     >
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
+      <Stack spacing={6}>
+      <Stack direction="row" 
+        spacing={2}
+        justifyContent={"space-around"}
+        sx={{width: "100%", height: "100%"}}
+        >
+      <FoodItem recipe="asdf" like />
+      <FoodItem recipe="jkl;" />
+      <FoodItem recipe="lol" like />
+      </Stack>
+      <Stack direction="row" 
+        spacing={2}
+        justifyContent={"space-around"}
+        sx={{width: "100%", height: "100%"}}
+        >
+      <FoodItem recipe="asdf" />
+      <FoodItem recipe="jkl;" like />
+      <FoodItem recipe="lol" />
+      </Stack>
+
+      </Stack>
     </Sheet>
   )
 }

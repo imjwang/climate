@@ -1,21 +1,32 @@
-import {createContext, useReducer, useMemo, useEffect, use} from 'react'
-import {auth, provider} from '@/utils/firebase'
+import {createContext, useReducer, useMemo, useEffect} from 'react'
+import {auth, provider, firestore} from '@/utils/firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
+import {doc, getDoc, setDoc} from 'firebase/firestore'
 
 const initialState = {
   authenticated: false,
   username: '',
-  photo: ''
+  photo: '',
+  uid: '',
+  likedRecipes: null,
+  traits: null,
+}
+
+const getUser = async (uid) => {
+  const ref = doc(firestore, `users/${uid}`)
+  const docSnap = await getDoc(ref)
+  return docSnap.data()
 }
 
 const firestoreReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_AUTH':
-      return {...state, authenticated: action.payload}
-    case 'SET_USERNAME':
-      return {...state, username: action.payload}
-    case 'SET_PHOTO':
-      return {...state, photo: action.payload}
+    case 'SIGN_IN_OUT':
+      const {displayName: username, photoURL: photo, uid} = action.payload
+      const authenticated = Object.keys(action.payload).length !== 0
+      return {...state, username, photo, uid, authenticated}
+    case 'SET_DATA':
+      const {likedRecipes, traits} = action.payload
+      return {...state, likedRecipes, traits}
     default:
       return state
   }
@@ -23,15 +34,24 @@ const firestoreReducer = (state, action) => {
 
 export const FirestoreContext = createContext()
 
+
 export const FirestoreProvider = ({children}) => {
   const [state, dispatch] = useReducer(firestoreReducer, initialState)
   
   const [user] = useAuthState(auth)
+  
+  const getUserData = async (uid) => {
+    const data = await getUser(uid)
+    dispatch({type: 'SET_DATA', payload: data})
+  }
 
   useEffect(() => {
-    dispatch({type: 'SET_AUTH', payload: user !== null})
-    dispatch({type: 'SET_USERNAME', payload: user?.displayName})
-    dispatch({type: 'SET_PHOTO', payload: user?.photoURL})
+    dispatch({type: 'SIGN_IN_OUT', payload: user ?? {}})
+    if (user !== null) {
+      getUserData(user.uid, user.displayName)
+    } else {
+      dispatch({type: 'SET_DATA', payload: {}})
+    }
   }, [user])
 
   const value = useMemo(() => ({state, dispatch}), [state])

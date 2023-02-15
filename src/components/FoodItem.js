@@ -4,8 +4,7 @@ import Image from "next/image"
 import NextLink from "next/link"
 import { useState } from "react"
 
-const FoodItem = () => {
-  const [isLiked, setIsLiked] = useState(false)
+const FoodItem = ({recipe, name, pic, desc, like}) => {
   return (
     <>
     <Card variant="outlined" sx={{ width: 320 }}>
@@ -18,26 +17,24 @@ const FoodItem = () => {
           alt=""
         />
       </AspectRatio>
-      <IconButton
-        aria-label="Like minimal photography"
-        size="md"
-        variant={isLiked ? 'plain' : 'soft'}
-        color={isLiked ? 'danger' : 'primary'}
-        sx={{
-          position: 'absolute',
-          zIndex: 2,
-          borderRadius: '50%',
-          right: '1rem',
-          bottom: 0,
-          transform: 'translateY(50%)',
-        }}
-        onClick={() => setIsLiked(!isLiked)}
-      >
-        <Favorite />
-      </IconButton>
+      {like && ( 
+        <Favorite
+          aria-label="Like minimal photography"
+          color={'danger'}
+          sx={{
+            position: 'absolute',
+            zIndex: 2,
+            borderRadius: '50%',
+            right: '1rem',
+            bottom: 0,
+            transform: 'translateY(50%)',
+            fontSize: 30
+          }}
+         />
+      )}
     </CardOverflow>
     <Typography level="h2" sx={{ fontSize: 'md', my: 2 }}>
-      <NextLink href="/recipe/asdf" style={{ textDecoration: 'none'}}>
+      <NextLink href={`/recipe/${recipe}`} style={{ textDecoration: 'none'}}>
       <Link overlay underline="none">
         Yosemite National Park
       </Link>

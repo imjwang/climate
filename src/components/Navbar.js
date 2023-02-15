@@ -24,7 +24,7 @@ const Navbar = () => {
         justifyContent: 'space-between',
         px: 2,
         py: 1,
-        minHeight: '130px',
+        minHeight: '100px',
       }}>
         <SearchBar />
         <Box sx={{backgroundColor: 'green'}}>flex box2</Box>

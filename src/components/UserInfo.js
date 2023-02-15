@@ -9,7 +9,11 @@ const UserInfo = () => {
   const {state, dispatch} = useContext(FirestoreContext)
 
   const signIn = async () => {
-    await signInWithPopup(auth, provider);
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.log(error)
+    }
   }
   const logOut = async () => {
     await signOut(auth);
@@ -22,6 +26,7 @@ const UserInfo = () => {
   {state.authenticated && 
   <>
   <h2>username: {state.username}</h2>
+  <p>uid: {state.uid}</p>
   <Image
     alt="profile pic"
     src={state.photo}
