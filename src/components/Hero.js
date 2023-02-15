@@ -1,4 +1,4 @@
-import {Container, Box, Typography, Button, Link} from '@mui/joy';
+import {Typography, Button, Link} from '@mui/joy';
 import HeroLayout from './HeroLayout';
 import NextLink from  'next/link';
 
@@ -8,7 +8,7 @@ const Hero = () => {
       sxBackground={{
         backgroundImage: `url("/background.jpeg")`,
         backgroundColor: 'cyan',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center 30%',
       }}
     >
       <Typography color="inherit" align="center" level="h1" marked="center">
@@ -22,7 +22,7 @@ const Hero = () => {
       >
         Something something food app platform thing
       </Typography>
-      <NextLink href="/dashboard">
+      <NextLink href="/search" style={{ textDecoration: 'none'}}>
       <Button
         color="primary"
         variant="solid"

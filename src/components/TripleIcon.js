@@ -7,7 +7,7 @@ const TripleIcon = () => {
       <Stack direction="row" 
         divider={<Divider orientation="vertical" />}
         spacing={2}
-        justifyContent={"space-between"}
+        justifyContent={"space-around"}
         sx={{width: "100%", height: "100%"}}
         >
       <Card sx={{bgcolor: "white", width: "20vw", height: "20vw"}}>

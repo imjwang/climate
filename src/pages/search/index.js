@@ -1,7 +1,7 @@
 import Navbar from '@/components/Navbar'
 import FoodDisplay from '@/components/FoodDisplay'
 
-const Dashboard = () => {
+const Search = () => {
   return (
     <>
       <Navbar />
@@ -10,4 +10,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Search;

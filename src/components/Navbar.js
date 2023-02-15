@@ -18,11 +18,13 @@ const Navbar = () => {
       variant="solid"
       sx={{
         width: '100%',
-        height: '12vh',
+        height: '10vh',
         bgcolor: '#04b545',
         display: 'flex',
         justifyContent: 'space-between',
         px: 2,
+        py: 1,
+        minHeight: '130px',
       }}>
         <SearchBar />
         <Box sx={{backgroundColor: 'green'}}>flex box2</Box>
