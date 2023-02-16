@@ -12,7 +12,8 @@ const ImageUpload = () => {
   const [image, setImage] = useState({})
 
   const handleClick = () => {
-    const storageRef = ref(storage, `images/${image.name}`)
+    const superSecureHash = Date.now()
+    const storageRef = ref(storage, `images/${superSecureHash}-${image.name}`)
     const uploadTask = uploadBytesResumable(storageRef, image, metadata)
     uploadTask.on('state_changed', (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
@@ -30,6 +31,7 @@ const ImageUpload = () => {
     }, (error) => {
       console.log(error)
     }, () => {
+      //need to save this to firestore
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log('File available at', downloadURL)
       })
@@ -38,7 +40,7 @@ const ImageUpload = () => {
   
   return (
     <>
-    <Typography level="h1">Image Upload</Typography>
+    <Typography level="h4">Image Upload</Typography>
     <Input
       type="file"
       onChange={(e) => setImage(e.target.files[0])}

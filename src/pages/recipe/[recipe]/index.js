@@ -1,11 +1,10 @@
 import { useRouter } from "next/router"
 
 const RecipePage = () => {
-  const router = useRouter()
-  const { recipe } = router.query
+  const {query} = useRouter()
   return (
     <div>
-      <h1>{recipe}</h1>
+      <h1>{query}</h1>
     </div>
   )
 }
