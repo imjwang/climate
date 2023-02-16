@@ -4,6 +4,7 @@ import FoodItem from "@/components/FoodItem"
 
 const FoodDisplay = () => {
   return (
+    <>
     <Sheet
       variant="solid"
       sx={{
@@ -36,9 +37,9 @@ const FoodDisplay = () => {
       <FoodItem recipe="jkl;" like />
       <FoodItem recipe="lol" />
       </Stack>
-
       </Stack>
     </Sheet>
+    </>
   )
 }
 

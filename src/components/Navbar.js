@@ -1,10 +1,12 @@
-import {Box, Sheet,Button} from '@mui/joy'
+import {Box, Sheet} from '@mui/joy'
 import { useRouter } from 'next/router';
 import SearchBar from '@/components/SearchBar'
-
+import { FirestoreContext } from '@/context/firestoreStore';
+import { useContext } from 'react';
+import AvatarButton from '@/components/AvatarButton';
 
 const Navbar = () => {
-  
+  const { state } = useContext(FirestoreContext)
   const router = useRouter()
   
   const handleClick = (e) => {
@@ -28,9 +30,7 @@ const Navbar = () => {
       }}>
         <SearchBar />
         <Box sx={{backgroundColor: 'green'}}>flex box2</Box>
-        <Box sx={{backgroundColor: 'blue'}}>
-          <Button onClick={handleClick}>Account</Button>
-        </Box>
+        <AvatarButton />
       </Sheet>
     </>
   )

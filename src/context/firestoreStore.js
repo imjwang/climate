@@ -42,7 +42,7 @@ export const FirestoreProvider = ({children}) => {
   
   const getUserData = async (uid) => {
     const data = await getUser(uid)
-    dispatch({type: 'SET_DATA', payload: data})
+    dispatch({type: 'SET_DATA', payload: data ?? {}})
   }
 
   useEffect(() => {

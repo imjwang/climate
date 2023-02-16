@@ -1,7 +1,6 @@
 import { AspectRatio, Card, CardOverflow, Divider, Typography, IconButton, Link } from "@mui/joy"
 import { Favorite } from "@mui/icons-material"
 import Image from "next/image"
-import NextLink from "next/link"
 import { useState } from "react"
 
 const FoodItem = ({recipe, name, pic, desc, like}) => {
@@ -34,11 +33,9 @@ const FoodItem = ({recipe, name, pic, desc, like}) => {
       )}
     </CardOverflow>
     <Typography level="h2" sx={{ fontSize: 'md', my: 2 }}>
-      <NextLink href={`/recipe/${recipe}`} style={{ textDecoration: 'none'}}>
-      <Link overlay underline="none">
+      <Link href={`/recipe/${recipe}`} overlay underline="none">
         Yosemite National Park
       </Link>
-      </NextLink>
     </Typography>
 
     <Divider inset="context" />

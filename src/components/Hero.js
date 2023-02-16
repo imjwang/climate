@@ -11,13 +11,14 @@ const Hero = () => {
         backgroundPosition: 'center 30%',
       }}
     >
-      <Typography color="inherit" align="center" level="h1" marked="center" sx={{pt:4}}>
+      <Typography color="inherit" align="center" level="display1" sx={{pt:4}}>
         Oṣadhi
       </Typography>
       <Typography
         color="inherit"
         align="center"
-        level="h4"
+        level="h3"
+        fontWeight="lg"
         sx={{ mb: 4, mt: 2 }}
       >
         Something something food app platform thing
