@@ -1,4 +1,4 @@
-import {Box, Sheet} from '@mui/joy'
+import {Box, Sheet, Typography} from '@mui/joy'
 import { useRouter } from 'next/router';
 import SearchBar from '@/components/SearchBar'
 import { FirestoreContext } from '@/context/firestoreStore';
@@ -21,15 +21,17 @@ const Navbar = () => {
       sx={{
         width: '100%',
         height: '10vh',
-        bgcolor: '#04b545',
+        bgcolor: '#0d7028',
         display: 'flex',
         justifyContent: 'space-between',
         px: 2,
         py: 1,
         minHeight: '100px',
       }}>
-        <SearchBar />
-        <Box sx={{backgroundColor: 'green'}}>flex box2</Box>
+      <Typography color="inherit" align="center" level="h4" fontWeight="xl" sx={{py:3, cursor:"default", userSelect:"none" }}>
+      Oṣadhi
+      </Typography>
+        {/* <SearchBar /> */}
         <AvatarButton />
       </Sheet>
     </>

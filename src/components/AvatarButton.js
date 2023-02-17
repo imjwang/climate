@@ -1,6 +1,6 @@
 
 import Link from "next/link"
-import { Avatar } from "@mui/joy"
+import { Avatar, Chip } from "@mui/joy"
 import { useContext } from "react"
 import { FirestoreContext } from "@/context/firestoreStore"
 
@@ -9,7 +9,17 @@ const AvatarButton = () => {
 
   return (
     <Link href={"/account"}>
-    <Avatar variant="solid" color="primary" size="lg" alt={state.username} src={state.photo} sx={{ mt:2, mr:2 }} />
+    <Chip
+    variant="soft"
+    color="success"
+    size="lg"
+    startDecorator={<Avatar variant="solid" color="primary" size="lg" alt={state.username} src={state.photo} />}
+    sx={{
+      my:3
+    }}
+  >
+    {state.username}
+  </Chip>
     </Link>
   )
   }

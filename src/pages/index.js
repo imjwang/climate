@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import Hero from '@/components/Hero'
 import TripleIcon from '@/components/TripleIcon'
+import End from '@/components/End'
+import Solution from '@/components/Solution'
+import Why from '@/components/Why'
 
 export default function Home() {
   return (
@@ -14,6 +17,9 @@ export default function Home() {
       <main>
         <Hero />
         <TripleIcon />
+        <Why />
+        <Solution />
+        <End />
       </main>
     </>
   )

@@ -1,11 +1,11 @@
 import Navbar from '@/components/Navbar'
-import FoodDisplay from '@/components/FoodDisplay'
+import NavTabs from '@/components/NavTabs';
 
 const Search = () => {
   return (
     <>
       <Navbar />
-      <FoodDisplay />
+      <NavTabs />
     </>
   );
 };

@@ -11,11 +11,8 @@ const FoodDisplay = () => {
         width: '100%',
         height: '100%',
         bgcolor: 'white',
-        display: 'flex',
-        justifyContent: 'space-evenly',
         px: 2,
         py:2,
-        color: 'black'
       }}
     >
       <Stack spacing={6}>
