@@ -3,7 +3,7 @@ import { Favorite } from "@mui/icons-material"
 import Image from "next/image"
 import { useState } from "react"
 
-const FoodItem = ({recipe, name, pic, desc, like}) => {
+const FoodItem = ({recipe, name, pic, desc, liked}) => {
   return (
     <>
     <Card variant="outlined" sx={{ width: 320 }}>
@@ -16,7 +16,7 @@ const FoodItem = ({recipe, name, pic, desc, like}) => {
           alt=""
         />
       </AspectRatio>
-      {like && ( 
+      {liked && ( 
         <Favorite
           aria-label="Like minimal photography"
           color={'danger'}

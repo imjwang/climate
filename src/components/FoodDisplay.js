@@ -21,9 +21,9 @@ const FoodDisplay = () => {
         justifyContent={"space-around"}
         sx={{width: "100%", height: "100%"}}
         >
-      <FoodItem recipe="asdf" like />
+      <FoodItem recipe="asdf" liked />
       <FoodItem recipe="jkl;" />
-      <FoodItem recipe="lol" like />
+      <FoodItem recipe="lol" liked />
       </Stack>
       <Stack direction="row" 
         spacing={2}
@@ -31,7 +31,7 @@ const FoodDisplay = () => {
         sx={{width: "100%", height: "100%"}}
         >
       <FoodItem recipe="asdf" />
-      <FoodItem recipe="jkl;" like />
+      <FoodItem recipe="jkl;" liked />
       <FoodItem recipe="lol" />
       </Stack>
       </Stack>

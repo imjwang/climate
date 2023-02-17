@@ -11,7 +11,7 @@ const Hero = () => {
         backgroundPosition: 'center 30%',
       }}
     >
-      <Typography color="inherit" align="center" level="display1" sx={{pt:4}}>
+      <Typography color="inherit" align="center" level="display1" sx={{pt:4, position:"sticky", bottom: "1rem"}}>
         Oṣadhi
       </Typography>
       <Typography
@@ -28,9 +28,9 @@ const Hero = () => {
         color="primary"
         variant="solid"
         size="lg"
-        sx={{ minWidth: 150 }}
+        sx={{ minWidth: 130 }}
       >
-        Join Now
+        Enter
       </Button>
       </NextLink>
     </HeroLayout>

@@ -1,16 +1,11 @@
 import {Container, Box, styled} from '@mui/joy';
 
-const HeroLayoutRoot = styled('section')(({ theme }) => ({
-  color: theme.palette.common.white,
+const HeroLayoutRoot = styled('section')(({ height }) => ({
+  color: 'white',
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  height: '100vh',
-  [theme.breakpoints.up('md')]: {
-    height: '70vh',
-    minHeight: 300,
-    maxHeight: 1300,
-  },
+  height: height || '80vh',
 }));
 
 const Background = styled(Box)({
@@ -24,11 +19,9 @@ const Background = styled(Box)({
   zIndex: -2,
 });
 
-const HeroLayout = (props) => {
-  const { sxBackground, children } = props;
-
+const HeroLayout = ({sxBackground, children, height}) => {
   return (
-    <HeroLayoutRoot>
+    <HeroLayoutRoot height={height}>
       <Container
         sx={{
           mt: 3,
@@ -36,6 +29,7 @@ const HeroLayout = (props) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          objectFit: 'cover',
         }}
       >
         {children}

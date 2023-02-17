@@ -1,5 +1,6 @@
 import {Tabs, TabList, Tab, TabPanel} from '@mui/joy'
 import FoodDisplay from '@/components/FoodDisplay'
+import AddDisplay from './AddDisplay'
 
 const NavTabs = () => {
   return (
@@ -17,7 +18,7 @@ const NavTabs = () => {
     <b>Second</b> tab panel
   </TabPanel>
   <TabPanel value={2} sx={{ p: 2 }}>
-    <b>Third</b> tab panel
+    <AddDisplay />
   </TabPanel>
   <TabPanel value={3} sx={{ p: 2 }}>
     <b>Fourth</b> tab panel
