@@ -3,7 +3,7 @@ import { useState, useContext, useRef } from "react"
 import ImageUpload from "@/components/ImageUpload"
 import { storage } from "@/utils/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { FirestoreContext } from "@/context/firestoreStore"
+import { FirestoreContext, createRecipe } from "@/context/firestoreStore"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
 
 //TODO set these
@@ -37,31 +37,37 @@ const RecipeForm = () => {
   const [image, setImage] = useState(null)
   const formRef = useRef()
   
-  //TODO call firebase
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const {name, method, ingredients, instructions} = e.target
-    console.log(name.value, method[1].value, ingredients.value, instructions.value)
-
-
-    const metadata = {
-      contentType: 'image/png',
+    if (!state.authenticated) {
+      dispatch({type: 'DISPATCH_ALERT', payload: { type: "error", message: 'You must be logged in to submit a recipe'}})
+    } else {
+      const superSecureHash = Date.now()
+  
+      const {name, method, ingredients, instructions} = e.target
+      const recipe = {uid: superSecureHash, name: name.value, 
+        method: method[1].value, ingredients: ingredients.value, 
+        instructions: instructions.value, author: state.username, ai: false}
+        
+      const metadata = {
+        contentType: 'image/png',
+      }
+      
+      const storageRef = ref(storage, `images/${superSecureHash}-${image?.name}`)
+  
+      formRef.current.reset()
+      setImage(null)
+  
+      dispatch({type: 'SET_LOADING', payload: true})
+  
+      await uploadBytes(storageRef, image, metadata)
+      const url = await getDownloadURL(storageRef)
+      await createRecipe({...recipe, image: url})
+      
+      dispatch({type: 'SET_LOADING', payload: false})
+      dispatch({type: 'DISPATCH_ALERT', payload: { type: "success", message: 'Recipe submitted successfully'}})
     }
-    
-    const superSecureHash = Date.now()
-    const storageRef = ref(storage, `images/${superSecureHash}-${image?.name}`)
 
-    formRef.current.reset()
-    setImage(null)
-
-    dispatch({type: 'SET_LOADING', payload: true})
-    await uploadBytes(storageRef, image, metadata)
-    const url = await getDownloadURL(storageRef)
-    
-    dispatch({type: 'SET_LOADING', payload: false})
-    console.log(url)
-
-    //call firebase to add recipe
   }
 
   return (

@@ -19,6 +19,11 @@ const getUser = async (uid) => {
   return docSnap.data()
 }
 
+export const createRecipe = async (recipe) => {
+  const ref = doc(firestore, `recipes/${recipe.name}-${recipe.uid}`)
+  await setDoc(ref, recipe)
+}
+
 const firestoreReducer = (state, action) => {
   switch (action.type) {
     case 'SIGN_IN_OUT':
