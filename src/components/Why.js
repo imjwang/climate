@@ -1,15 +1,15 @@
-import { Typography, Sheet, Card, Stack, Divider } from "@mui/joy"
+import { Typography, Sheet, Card, Stack, Divider, AspectRatio } from "@mui/joy"
 import Osadhi from "@/components/Osadhi"
 
 const Why = () => {
   return (
-    <Sheet sx={{pl: 6, py: 6, height: "400vh", bgcolor: "black"}}>
+    <Sheet sx={{pl: 6, py: 6, height: "300vh", bgcolor: "black"}}>
     <Typography level="display2" color="info">
       why
     </Typography>
-    <Sheet sx={{my: 6, ml: 8, pl:6, py:4, height: "200vh", width: "fit", bgcolor: "paleturquoise" }}>
-      <Stack direction="row" spacing={10}>
-      <Card sx={{px: 4, py: 4, width: "50%"}}>
+    <Sheet sx={{my: 6, ml: 8, px:3, py:4, height: "160vh", width: "fit", bgcolor: "paleturquoise" }}>
+      <Stack direction={{xs: "column", md: "row"}} spacing={2}>
+      <Card sx={{px: 4, py: 4, width: "47%"}}>
         <Osadhi />
         <Typography level="body1" color="success">
         <Typography color="success" variant="soft">Oṣadhi (ओषधि):</Typography> In the Ṛgveda plants (oṣadhi) are personified as divine and a whole and 
@@ -22,8 +22,20 @@ const Why = () => {
         Source: Google Books: Cultural History from the Vāyu Purāna
         </Typography>
       </Card>
+      <Card color="primary" sx={{my:2, width: "47%"}}>
+        <Typography level="h1" color="info">
+          The Inspiration
+        </Typography>
+        <Stack direction={{xs: "column", md: "row"}} sx={{mt:2}}>
+        <Typography level="display1" color="success">40%</Typography>
+        <Divider orientation="vertical" sx={{mx : 2}} />
+        <Typography level="h4">
+          Around 40 percent of India&apos;s population is vegetarian, and the culture has a long tradition of delicious vegetarian cuisine.<br/>
+        </Typography>
+        </Stack>
+        </Card>
       </Stack>
-        <Card color="primary" sx={{my:2, width: "95%"}}>
+        <Card color="primary" sx={{my:2, width: "96%"}}>
         <Typography level="h1" color="info">
           To save the world...
         </Typography>
@@ -45,28 +57,16 @@ const Why = () => {
           Source: https://www.ecotricity.co.uk/<br />
           </Typography>
         </Card>
-        <Card color="primary" sx={{my:2, width: "95%"}}>
+        <Card color="primary" sx={{my:2, width: "96%"}}>
         <Typography level="h1" color="info">
           The Cost...
         </Typography>
-        <Stack direction="row">
+        <Stack direction="row" sx={{mt:2}}>
         <Typography level="display1" color="danger">14.5%</Typography>
         <Divider orientation="vertical" sx={{mx : 2}} />
         <Typography level="h4">
         Livestock are responsible for at least 14.5 percent of global greenhouse gases, some estimates are in the 30 percentage points.<br/>
         A 2017 landmark study found that the top three meat firms – JBS, Cargill and Tyson – emitted more greenhouse gases in 2016 than all of France.
-        </Typography>
-        </Stack>
-        </Card>
-        <Card color="primary" sx={{my:2, width: "95%"}}>
-        <Typography level="h1" color="info">
-          The Inspiration
-        </Typography>
-        <Stack direction="row">
-        <Typography level="display1" color="success">40%</Typography>
-        <Divider orientation="vertical" sx={{mx : 2}} />
-        <Typography level="h4">
-          Around 40 percent of India&apos;s population is vegetarian, and the culture has a long tradition of delicious vegetarian cuisine.<br/>
         </Typography>
         </Stack>
         </Card>

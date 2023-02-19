@@ -20,21 +20,21 @@ const Solution = () => {
       Your friends and family probably know your tastes to some extent. But with recent advances in Artificial Intelligence, could it be possible
       to train a recommendation engine that knows you better than your friends and family?
       <br/>
-      Is it really that far-fetched? Your Netflix algorithm doesn't know how to laugh, but is great at recommending you shows to binge.
-      Your Spotify algorithm doesn't know how to love, but it knows how to work your circuits through autoplay.
+      Is it really that far-fetched? Your Netflix algorithm doesn&apos;t know how to laugh, but is great at recommending you shows to binge.
+      Your Spotify autoplay is not emotional, but knows how to play to your emotions.
     </Typography>
     <Typography level="h1">
       The Platform
     </Typography>
     <Typography level="h4">
-      If we're going to build a recommendation engine, we first have to create a data platform that enables content creation.
+      If we&apos;re going to build a recommendation engine, we first have to create a data platform that enables content creation.
       <br/>
       We also need an account system to keep track of your preferences.
       <br/>
       And of course, we have to standardize what constitutes a recipe...
       <br/>
       <br/>
-      ...But enough said, let's get cooking!
+      ...But enough said, let&apos;s get cooking!
     </Typography>
       </Stack>
   </Sheet>
