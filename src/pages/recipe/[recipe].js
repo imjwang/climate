@@ -1,19 +1,20 @@
 import { useRouter } from "next/router"
 import { Sheet, Typography, IconButton, Stack, Divider, Card } from "@mui/joy"
 import HeroLayout from "@/components/HeroLayout"
-import useSwr from 'swr'
 import { Favorite } from "@mui/icons-material"
 import { useState, useEffect, useContext } from "react"
 import { FirestoreContext, addLike, removeLike } from "@/context/firestoreStore"
+import useRecipes from "@/hooks/recipeSwr"
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const RecipePage = () => {
-  // like should be in context
   const {query: {recipe}} = useRouter()
   const {state, dispatch} = useContext(FirestoreContext)
-  const {data, error, isLoading} = useSwr(`/api/recipe/${recipe}`, fetcher)
   
+  const {data, isLoading} = useRecipes()
+
+  const current = data?.find(r => r.path === recipe)
+
   const like = state.likedRecipes?.includes(recipe)
 
 
@@ -43,7 +44,7 @@ const RecipePage = () => {
     <HeroLayout
       height="40vh"
       sxBackground={{
-        backgroundImage: `url(https://firebasestorage.googleapis.com/v0/b/climate-823dd.appspot.com/o/images%2F1676654960813-max_depth_example.png?alt=media&token=5c3c3c93-98e8-4f91-ac7d-0177766d5ff2)`,
+        backgroundImage: `url(${current?.image})`,
         backgroundPosition: 'center',
       }}
     >
@@ -67,14 +68,24 @@ const RecipePage = () => {
           <Favorite sx={{fontSize:50}} />
         </IconButton>
     </HeroLayout>
-    <Sheet variant="outlined" color="primary" sx={{ px: 2, py: 1, height: "100vh", bgcolor: "white"}}>
-      <Card variant="outlined" color="primary" sx={{width:"450px", height:"180px", pt:4}}>
+    <Sheet variant="outlined" color="primary" sx={{ px: 2, py: 1, bgcolor: "white"}}>
+      <Card variant="outlined" color="primary" sx={{width:"450px", height:"180px", pt:4, my:2}}>
     <Stack spacing={2} direction="row">
-      <Typography level="h3" fontWeight="lg" sx={{cursor:"default", userSelect:"none"}}>{data?.name}</Typography>
+      <Typography level="h2" fontWeight="lg" sx={{cursor:"default", userSelect:"none"}}>{current?.name}</Typography>
       <Divider orientation="vertical" sx={{cursor:"default", userSelect:"none"}}>by</Divider>
-      <Typography level="h6" sx={{pt:8, cursor:"default", userSelect:"none"}}>recipe author</Typography>
+      <Typography level="h4" sx={{pt:8, cursor:"default", userSelect:"none"}}>{current?.author}</Typography>
     </Stack>
       </Card>
+      <Stack spacing={2}>
+      <Sheet variant="soft" color="info" sx={{px:2, py:2}}>
+      <Typography level="h3">Ingredients</Typography>
+      <Typography sx={{whiteSpace: "pre-wrap"}}>{current?.ingredients}</Typography>
+      </Sheet>
+      <Sheet variant="soft" color="success" sx={{px:2, py:2}}>
+      <Typography level="h3">Instructions</Typography>
+      <Typography sx={{whiteSpace: "pre-wrap"}}>{current?.instructions}</Typography>
+      </Sheet>
+      </Stack>
     </Sheet>
     </>
   )

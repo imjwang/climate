@@ -1,12 +1,17 @@
 import { Sheet, Grid } from "@mui/joy"
 import FoodItem from "@/components/FoodItem"
 import SearchBar from "@/components/SearchBar"
-
+import { CircularProgress } from '@mui/joy';
+import useRecipes from '@/hooks/recipeSwr';
 
 
 const FoodDisplay = () => {
-  //TODO remove test data
-  const testArray = ["asdf", "jkl;", "awea", "lol", "asdf", "jkl;", "lol", "hi there"]
+  const {data, isLoading} = useRecipes()
+  
+  if (isLoading) {
+    return <CircularProgress />
+  }
+
   return (
     <>
     <Sheet
@@ -23,9 +28,9 @@ const FoodDisplay = () => {
       spacing={2}
       sx={{width: "100%", height: "100%"}}
       >
-      {testArray.map((recipe, index) => (
+      {data.map((recipe, index) => (
         <Grid xs={12} sm={6} md={4} lg={3} key={index}>
-            <FoodItem recipe={recipe} />
+            <FoodItem recipe={recipe.name} url={recipe.path} image={recipe.image} name={recipe.name} author={recipe.author} />
         </Grid>
       ))
       }

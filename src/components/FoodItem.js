@@ -4,9 +4,9 @@ import Image from "next/image"
 import { useState, useContext } from "react"
 import { FirestoreContext } from "@/context/firestoreStore"
 
-const FoodItem = ({recipe, name, pic, desc}) => {
+const FoodItem = ({recipe, url, name, image, author}) => {
   const {state} = useContext(FirestoreContext)
-  const liked = state.likedRecipes?.includes(recipe)
+  const liked = state.likedRecipes?.includes(url)
 
   return (
     <>
@@ -14,10 +14,9 @@ const FoodItem = ({recipe, name, pic, desc}) => {
     <CardOverflow>
       <AspectRatio ratio="2">
         <img
-          src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318"
-          srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+          src={image}
           loading="lazy"
-          alt=""
+          alt={name}
         />
       </AspectRatio>
       {liked && ( 
@@ -37,8 +36,8 @@ const FoodItem = ({recipe, name, pic, desc}) => {
       )}
     </CardOverflow>
     <Typography level="h2" sx={{ fontSize: 'md', my: 2 }}>
-      <Link href={`/recipe/${recipe}`} overlay underline="none">
-        Yosemite National Park
+      <Link href={`/recipe/${url}`} overlay underline="none">
+        {name}
       </Link>
     </Typography>
 
@@ -54,7 +53,7 @@ const FoodItem = ({recipe, name, pic, desc}) => {
       }}
     >
       <Typography level="h3" sx={{ fontSize: 'sm' }}>
-        something
+        {author}
       </Typography>
     </CardOverflow>
   </Card>
