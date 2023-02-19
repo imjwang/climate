@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { getFirestore, collection, limit, doc, getDocs, query, where } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -36,35 +36,4 @@ export async function getUser(id) {
   const querySnapshot = await getDocs(q);
   const userDoc = querySnapshot.docs[0];
   return userDoc;
-}
-
-export const imageToFirebase = (image) => {
-  const metadata = {
-    contentType: 'image/png',
-  }
-  
-  const superSecureHash = Date.now()
-  const storageRef = ref(storage, `images/${superSecureHash}-${image?.name}`)
-  const uploadTask = uploadBytesResumable(storageRef, image, metadata)
-  uploadTask.on('state_changed', (snapshot) => {
-    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    console.log(`Upload is ${progress}% done`)
-    switch (snapshot.state) {
-      case 'paused':
-        console.log('Upload is paused')
-        break
-      case 'running':
-        console.log('Upload is running')
-        break
-      default:
-        break
-    }
-  }, (error) => {
-    console.log(error)
-  }, () => {
-    //need to save this to firestore
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL)
-    })
-  })
 }

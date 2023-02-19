@@ -1,5 +1,6 @@
 import { Sheet, Stack } from "@mui/joy"
 import FoodItem from "@/components/FoodItem"
+import SearchBar from "@/components/SearchBar"
 
 
 const FoodDisplay = () => {
@@ -12,9 +13,9 @@ const FoodDisplay = () => {
         height: '100%',
         bgcolor: 'white',
         px: 2,
-        py:2,
       }}
     >
+      <SearchBar />
       <Stack spacing={6}>
       <Stack direction="row" 
         spacing={2}
@@ -23,6 +24,7 @@ const FoodDisplay = () => {
         >
       <FoodItem recipe="asdf" liked />
       <FoodItem recipe="jkl;" />
+      <FoodItem recipe="awea" liked />
       <FoodItem recipe="lol" liked />
       </Stack>
       <Stack direction="row" 
@@ -33,6 +35,7 @@ const FoodDisplay = () => {
       <FoodItem recipe="asdf" />
       <FoodItem recipe="jkl;" liked />
       <FoodItem recipe="lol" />
+      <FoodItem recipe="hi there" liked />
       </Stack>
       </Stack>
     </Sheet>

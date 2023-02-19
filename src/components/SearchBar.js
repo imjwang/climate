@@ -1,24 +1,31 @@
-import { Input} from "@mui/joy";
+import { Autocomplete, Button} from "@mui/joy";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
 
 
 const SearchBar = () => {
-  const [input, setInput] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(input)
+    const {search} = e.target
+    console.log(search.value)
   }
   return (
     <form onSubmit={handleSubmit}>
-      <Input value={input} onChange={e => setInput(e.target.value)} 
+      <Autocomplete
       size="lg" variant="outlined" placeholder="idli..." 
       startDecorator={<SearchIcon />}
-      autoComplete="off"
-    sx={{
+      endDecorator={<Button type="submit">Search</Button>}
+      options={["bake", "grill", "fry", "boil", "steam"]}
+      name="search"
+      freeSolo
+      autoHighlight
+      autoComplete
+      includeInputInList
+      disableClearable
+      sx={{
       width: '50vw',
       fontSize: 22,
-      my: 2,
+      mb: 2,
     }}
     />
     </form>

@@ -1,7 +1,14 @@
-import { Sheet, Card, Stack, Divider } from "@mui/joy"
+import { Sheet, Card, Stack, Divider, Typography } from "@mui/joy"
+import PetsIcon from '@mui/icons-material/Pets';
+import ForestIcon from '@mui/icons-material/Forest';
+import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
+import Icon from "@/components/Icon";
+
+const climateText = `Reducing our carbon footprint through encouraging plant focused diet.`
+const animalWelfareText = `Enabling animals to live more fulfilling lives.`
+const wellnessText = `Promoting mindful and healthy lives through food.`
 
 const TripleIcon = () => {
-
   return (
     <Sheet variant="soft" color="warning" sx={{px: 14, py: 20, height: "80vh"}}>
       <Stack direction="row" 
@@ -10,15 +17,15 @@ const TripleIcon = () => {
         justifyContent={"space-around"}
         sx={{width: "100%", height: "100%"}}
         >
-      <Card sx={{bgcolor: "white", width: "20vw", height: "20vw"}}>
-      <p>aweaw oeif<br /> joiaw jefo iajwef <br /> iojawoi <br />fejaoi <br />wefj <br />oiaw<br /><br />jefoia <br />wjefiofs</p>
-      </Card>
-      <Card sx={{bgcolor: "cyan", width: "20vw", height: "20vw"}}>
-      <p>aweaw oeif joiaw jefo iajwef iojawoi fejaoi wefj oiawjefoia wjefiofs</p>
-      </Card>
-      <Card sx={{bgcolor: "gold", width: "20vw", height: "20vw"}}>
-      <p>aweaw oeif joiaw jefo iajwef iojawoi fejaoi wefj oiawjefoia wjefiofs</p>
-      </Card>
+      <Icon title="Climate" description={climateText}>
+        <ForestIcon sx={{fontSize: 140, alignSelf: "center"}} />
+      </Icon>
+      <Icon title="Animal Welfare" description={animalWelfareText}>
+        <PetsIcon sx={{fontSize: 140, alignSelf: "center"}} />
+      </Icon>
+      <Icon title="Wellness" description={wellnessText}>
+      <SelfImprovementIcon sx={{fontSize: 140, alignSelf: "center"}} />
+      </Icon>
       </Stack>
     </Sheet>
   )

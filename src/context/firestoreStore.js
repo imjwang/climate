@@ -10,6 +10,7 @@ const initialState = {
   uid: '',
   likedRecipes: null,
   traits: null,
+  loading: false
 }
 
 const getUser = async (uid) => {
@@ -27,6 +28,9 @@ const firestoreReducer = (state, action) => {
     case 'SET_DATA':
       const {likedRecipes, traits} = action.payload
       return {...state, likedRecipes, traits}
+    case 'SET_LOADING':
+      const loading = action.payload
+      return {...state, loading}
     default:
       return state
   }

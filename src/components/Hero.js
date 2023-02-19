@@ -11,7 +11,7 @@ const Hero = () => {
         backgroundPosition: 'center 30%',
       }}
     >
-      <Typography color="inherit" align="center" level="display1" sx={{pt:4, position:"sticky", bottom: "1rem"}}>
+      <Typography color="inherit" align="center" level="display1" sx={{pt:4}}>
         Oṣadhi
       </Typography>
       <Typography
