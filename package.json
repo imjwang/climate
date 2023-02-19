@@ -16,7 +16,6 @@
     "@mui/joy": "5.0.0-alpha.66",
     "@mui/material": "^5.11.8",
     "@next/font": "13.1.6",
-    "cors": "^2.8.5",
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "firebase": "^9.17.1",

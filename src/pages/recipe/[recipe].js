@@ -3,15 +3,41 @@ import { Sheet, Typography, IconButton, Stack, Divider, Card } from "@mui/joy"
 import HeroLayout from "@/components/HeroLayout"
 import useSwr from 'swr'
 import { Favorite } from "@mui/icons-material"
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
+import { FirestoreContext, addLike, removeLike } from "@/context/firestoreStore"
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const RecipePage = () => {
   // like should be in context
-  const [like, setLike] = useState(false)
   const {query: {recipe}} = useRouter()
+  const {state, dispatch} = useContext(FirestoreContext)
   const {data, error, isLoading} = useSwr(`/api/recipe/${recipe}`, fetcher)
+  
+  const like = state.likedRecipes?.includes(recipe)
+
+
+  const handleLike = async () => {
+    if (!state.authenticated) {
+      dispatch({type: 'DISPATCH_ALERT', payload: {type: "error", message: 'You must be logged in to like a recipe'}})
+      return
+    }
+    // extra safety to go along with disabled button
+    if (!state.loading) {
+      dispatch({type: 'SET_LOADING', payload: true})
+
+      if (like) {
+        dispatch({type: 'REMOVE_LIKE', payload: recipe})
+        await removeLike(recipe, state.uid)
+      } else {
+        dispatch({type: 'ADD_LIKE', payload: recipe})
+        await addLike(recipe, state.uid)
+      }
+
+      dispatch({type: 'SET_LOADING', payload: false})
+    }
+  }
+
   return (
     <>
     <HeroLayout
@@ -25,7 +51,7 @@ const RecipePage = () => {
           aria-label="like recipe"
           variant={like ? "plain" : "solid"}
           color="danger"
-          onClick={() => setLike(!like)}
+          onClick={handleLike}
           sx={{
             position: 'absolute',
             zIndex: 2,
@@ -36,6 +62,7 @@ const RecipePage = () => {
             width: "80px",
             height: "80px"
           }}
+          disabled={state.loading}
         >
           <Favorite sx={{fontSize:50}} />
         </IconButton>

@@ -1,15 +1,15 @@
 import {createContext, useReducer, useMemo, useEffect} from 'react'
 import {auth, provider, firestore} from '@/utils/firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
-import {doc, getDoc, setDoc} from 'firebase/firestore'
+import {doc, getDoc, setDoc, updateDoc, arrayRemove, arrayUnion} from 'firebase/firestore'
 
 const initialState = {
   authenticated: false,
   username: '',
   photo: '',
   uid: '',
-  likedRecipes: null,
-  traits: null,
+  likedRecipes: [],
+  traits: [],
   loading: false
 }
 
@@ -17,6 +17,20 @@ const getUser = async (uid) => {
   const ref = doc(firestore, `users/${uid}`)
   const docSnap = await getDoc(ref)
   return docSnap.data()
+}
+
+export const addLike = async (recipe, uid) => {
+  const ref = doc(firestore, `users/${uid}`)
+  await updateDoc(ref, {
+    likedRecipes: arrayUnion(recipe)
+  })
+}
+
+export const removeLike = async (recipe, uid) => {
+  const ref = doc(firestore, `users/${uid}`)
+  await updateDoc(ref, {
+    likedRecipes: arrayRemove(recipe)
+  })
 }
 
 export const createRecipe = async (recipe) => {
@@ -34,8 +48,13 @@ const firestoreReducer = (state, action) => {
       const {likedRecipes, traits} = action.payload
       return {...state, likedRecipes, traits}
     case 'SET_LOADING':
-      const loading = action.payload
-      return {...state, loading}
+      return {...state, loading: action.payload}
+    case 'ADD_LIKE':
+      state.likedRecipes.push(action.payload)
+      return {...state}
+    case 'REMOVE_LIKE':
+      state.likedRecipes = state.likedRecipes.filter((recipe) => recipe !== action.payload)
+      return {...state}
     default:
       return state
   }
@@ -62,6 +81,12 @@ export const FirestoreProvider = ({children}) => {
       dispatch({type: 'SET_DATA', payload: {}})
     }
   }, [user])
+
+  // useEffect(() => {
+  //   if (state.authenticated) {
+  //     addLike(state.uid, state.likedRecipes)
+  //   }
+  // }, [state.likedRecipes])
 
   const value = useMemo(() => ({state, dispatch}), [state])
 

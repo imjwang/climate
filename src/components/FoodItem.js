@@ -1,12 +1,16 @@
 import { AspectRatio, Card, CardOverflow, Divider, Typography, IconButton, Link } from "@mui/joy"
 import { Favorite } from "@mui/icons-material"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { FirestoreContext } from "@/context/firestoreStore"
 
-const FoodItem = ({recipe, name, pic, desc, liked}) => {
+const FoodItem = ({recipe, name, pic, desc}) => {
+  const {state} = useContext(FirestoreContext)
+  const liked = state.likedRecipes?.includes(recipe)
+
   return (
     <>
-    <Card variant="outlined" sx={{ width: 320 }}>
+    <Card variant="outlined" sx={{ width: "100%" }}>
     <CardOverflow>
       <AspectRatio ratio="2">
         <img

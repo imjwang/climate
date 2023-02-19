@@ -8,7 +8,6 @@ specifiers:
   '@mui/joy': 5.0.0-alpha.66
   '@mui/material': ^5.11.8
   '@next/font': 13.1.6
-  cors: ^2.8.5
   eslint: 8.33.0
   eslint-config-next: 13.1.6
   firebase: ^9.17.1
@@ -27,7 +26,6 @@ dependencies:
   '@mui/joy': 5.0.0-alpha.66_5rzy53przelm5jchjmb5vr6dxy
   '@mui/material': 5.11.8_5rzy53przelm5jchjmb5vr6dxy
   '@next/font': 13.1.6
-  cors: 2.8.5
   eslint: 8.33.0
   eslint-config-next: 13.1.6_eslint@8.33.0
   firebase: 9.17.1
@@ -1515,14 +1513,6 @@ packages:
 
   /convert-source-map/1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
-    dev: false
-
-  /cors/2.8.5:
-    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
-    engines: {node: '>= 0.10'}
-    dependencies:
-      object-assign: 4.1.1
-      vary: 1.1.2
     dev: false
 
   /cosmiconfig/7.1.0:
@@ -3441,11 +3431,6 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
-    dev: false
-
-  /vary/1.1.2:
-    resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
-    engines: {node: '>= 0.8'}
     dev: false
 
   /webidl-conversions/3.0.1:
