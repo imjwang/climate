@@ -23,7 +23,7 @@ const FoodDisplay = () => {
         px: 2,
       }}
     >
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Grid container 
       spacing={2}
       sx={{width: "100%", height: "100%"}}

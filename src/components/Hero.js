@@ -21,7 +21,7 @@ const Hero = () => {
         fontWeight="lg"
         sx={{ mb: 4, mt: 2 }}
       >
-        Something something food app platform thing
+        the food platform of the future
       </Typography>
       <NextLink href="/search" style={{ textDecoration: 'none'}}>
       <Button

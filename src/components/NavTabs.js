@@ -3,6 +3,7 @@ import FoodDisplay from '@/components/FoodDisplay'
 import AddDisplay from './AddDisplay'
 import Alert from '@/components/Alert'
 import GenerateDisplay from '@/components/GenerateDisplay'
+import AnalysisPage from '@/components/AnalysisDisplay'
 
 const NavTabs = () => {
   return (
@@ -24,7 +25,7 @@ const NavTabs = () => {
     <AddDisplay />
   </TabPanel>
   <TabPanel value={3} sx={{ p: 2 }}>
-    <b>Fourth</b> tab panel
+    <AnalysisPage />
   </TabPanel>
 </Tabs>
   )

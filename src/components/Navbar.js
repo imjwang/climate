@@ -31,7 +31,6 @@ const Navbar = () => {
       <Typography color="inherit" align="center" level="h4" fontWeight="xl" sx={{py:3, cursor:"default", userSelect:"none" }}>
       Oṣadhi
       </Typography>
-        {/* <SearchBar /> */}
         <AvatarButton />
       </Sheet>
     </>

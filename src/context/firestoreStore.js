@@ -11,7 +11,7 @@ const initialState = {
   likedRecipes: [],
   traits: [],
   loading: false,
-  recipes: []
+  celebrate: false,
 }
 
 const getUser = async (uid) => {
@@ -56,8 +56,8 @@ const firestoreReducer = (state, action) => {
     case 'REMOVE_LIKE':
       state.likedRecipes = state.likedRecipes.filter((recipe) => recipe !== action.payload)
       return {...state}
-    case 'SET_RECIPES':
-      return {...state, recipes: action.payload}
+    case 'SHOW_BUTTON':
+      return {...state, celebrate: action.payload}
     default:
       return state
   }

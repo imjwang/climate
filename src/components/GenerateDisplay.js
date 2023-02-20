@@ -17,9 +17,18 @@ const GenerateDisplay = () =>
   return (
     <>
       <Sheet color="warning" sx={{ px: 10 }}>
+        {state?.celebrate ? 
+        <>
+        <Typography color="inherit" level="h1" sx={{pt:2}}>success!</Typography>
+        <Typography color="inherit" sx={{pt:2}}>The wait is over!</Typography>
+        </>
+        : 
+        <>
       <Typography color="inherit" level="h1" sx={{pt:2}}>welcome to generate recipe</Typography>
-        <Typography color="inherit" sx={{pt:2}}>List your Ingredients.</Typography>
-        <Typography color="inherit" sx={{pb:2}}>Select a method, and wait patiently as we get to work.</Typography>
+        <Typography color="inherit" sx={{pt:2}}>List your Ingredients. Select a method.</Typography>
+        <Typography color="inherit" sx={{pb:2}}>Hang tight, this may take a few minutes.</Typography>
+        </>
+        }
         <GenerateForm />
       </Sheet>
     </>

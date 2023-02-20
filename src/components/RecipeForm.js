@@ -7,31 +7,21 @@ import { FirestoreContext, createRecipe } from "@/context/firestoreStore"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
 import AlertContext from "@/context/alertContext"
 
-//TODO set these
-const methodTypes = ["bake", "grill", "fry", "boil", "steam"]
+const methodTypes = ["bake", "grill", "stir fry", "boil", "steam", "deep fry"]
 
-//TODO better placeholders
-const test = `1.Lorem ipsum dolor sit amet, 
-2.consectetur adipiscing elit. Nulla vitae elit libero, a pharetra au
-3.gue. Nullam id dolor id ni
-4.tetur ac, vestibulum a
-5.icula ut id elit.a atur et. onec sed odio dui. Donec ullamcorper nulla non metus auc
-6.tetur ac, vestibulum a
-7. Nulla vitae elit libero, a pharetra 
-8.Morbi leo risus, port bh ultricies vehtor fringilla.augue.`
+const ingredientsPlaceholder = `urad dal
+idli rice
+thick poha
+salt
+water`
 
-const test2 = `1.Lorem ipsum dolor sit amet, 
-2.consectetur adipiscing elit. ulla vitae elit libero, a pharetra au
-3.gue. Nullam id dolor id ni
-4.tetur ac, vestibulum a
-5.icula ut id elit.a ac consect erosc sed odio dui. Donec ullamcorper nulla non metus auc
-6.tetur ac, vestibulum a
-7. Nulla vitae elit libero, a pharetra 
-8.Morbi leo risus, port bh ultri
-9.cies vehtor fringilla.augue.
-10. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-11. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-12. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
+const instructionsPlaceholder = `Grease the idli mould with oil. Gently and lightly swirl the batter.
+Take your idli steamer or pressure cooker or electric cooker or Instant pot. Add some 2 to 2.5 cups water and heat the water until it comes to a light boil. 
+Keep the idli mould in the steamer or pressure cooker. Steam for 12 to 15 minutes.
+Check for doneness by carefully inserting a bamboo skewer or knife. If it does not come out clean, then keep again for a few more minutes.
+When done remove the idli mould from the cooker. Don’t overcook as then they become dry. Dip a spoon or butter knife in water and slid them through the idlis.
+Remove and place the idlis in a warm container.`
+
 
 const RecipeForm = () => {
   const { state, dispatch } = useContext(FirestoreContext)
@@ -130,11 +120,11 @@ const RecipeForm = () => {
     </FormControl>
     <FormControl>
       <FormLabel>Ingredients</FormLabel>
-      <Textarea variant="outlined" color="info" minRows={8} placeholder={test} name="ingredients" required />
+      <Textarea variant="outlined" color="info" minRows={8} placeholder={ingredientsPlaceholder} name="ingredients" required />
     </FormControl>
     <FormControl>
       <FormLabel>Instructions</FormLabel>
-      <Textarea variant="outlined" color="info" minRows={16} placeholder={test2} name="instructions" required />
+      <Textarea variant="outlined" color="info" minRows={16} placeholder={instructionsPlaceholder} name="instructions" required />
     </FormControl>
     <Button type="submit" sx={{ width:"400px", alignSelf: "center" }} startDecorator={<LocalDiningOutlinedIcon />}>Publish</Button>
       </Stack>

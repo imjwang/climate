@@ -74,7 +74,7 @@ const RecipePage = () => {
   }}>
     <Stack spacing={2} direction="row">
       <Typography level="h2" fontWeight="lg" sx={{cursor:"default", userSelect:"none"}}>{current?.name}</Typography>
-      <Divider orientation="vertical" sx={{cursor:"default", userSelect:"none"}}>by</Divider>
+      <Divider orientation="vertical" sx={{cursor:"default", userSelect:"none"}}>{current?.ai ? 'for' : 'by'}</Divider>
       <Typography level="h4" sx={{pt:8, cursor:"default", userSelect:"none"}}>{current?.author}</Typography>
     </Stack>
     <Stack direction="row" spacing={1}>

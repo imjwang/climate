@@ -10,6 +10,13 @@ const createPrompt = (ingredients, method) => {
 
 }
 
+const createPromptForDalle = (recipe) => {
+  const prompt = `Create a descriptive name for this recipe:
+  ${recipe}`
+  
+  return prompt
+}
+
 const createPromptForUser = (history, personality) => {
   const prompt = `Instructions:
   ${history}
@@ -18,9 +25,11 @@ const createPromptForUser = (history, personality) => {
   return prompt
 }
 
-const createPromptForClimate = (history) => {
-  const prompt = `Instructions:
-  ${history}
+const createPromptForClimate = (result, ingredients) => {
+  const prompt = `Ingredients:
+  ${ingredients}
+  Instructions:
+  ${result}
   Write a version of the recipe that is climate conscious:`
 
   return prompt
@@ -48,7 +57,7 @@ const textCompletion = async (prompt) => {
       model: "text-davinci-003",
       prompt: prompt,
       temperature: 0.3,
-      max_tokens: 240,
+      max_tokens: 400,
     })
     console.log(response.data.choices[0].text)
     return response?.data
@@ -72,13 +81,16 @@ const openaiHandler = async (req, res) => {
       input = createPrompt(prompt, method)
       break
     case 'CLIMATE':
-      input = createPromptForClimate(prompt)
+      input = createPromptForClimate(prompt, method)
       break
     case 'PERSONALITY':
       input = createPromptForPersonality(prompt)
       break
     case 'PERSONAL':
       input = createPromptForUser(prompt, method)
+      break
+    case 'DALLE':
+      input = createPromptForDalle(prompt)
       break
   }
 
