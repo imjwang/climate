@@ -1,5 +1,7 @@
-import { Card, FormControl, Textarea, FormLabel, Select, Button, Option} from "@mui/joy"
+import { Card, FormControl, Stack, Textarea, FormLabel, Select, Button, Option} from "@mui/joy"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
+import { FirestoreContext } from "@/context/firestoreStore";
+import { useContext } from "react";
 
 const test2 = `1.Lorem ipsum dolor sit amet, 
 2.consectetur adipiscing elit. ulla vitae elit libero, a pharetra au
@@ -17,12 +19,50 @@ const test2 = `1.Lorem ipsum dolor sit amet,
 const methodTypes = ["bake", "grill", "fry", "boil", "steam"]
 
 const GenerateForm = () => {
+  
+  const {state, dispatch} = useContext(FirestoreContext)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const {ingredients, method} = e.target
+    console.log(method[1].value, ingredients.value)
+
+    dispatch({type: 'SET_LOADING', payload: true})
+    const initial = await fetch(`/api/openai?prompt=${ingredients.value}&type=INITIAL&method=${method[1].value}`)
+    const data = await initial.json()
+    console.log(data)
+    const initialResult = data.data.choices[0].text
+    dispatch({type: 'SET_LOADING', payload: false})
+    
+    dispatch({type: 'SET_LOADING', payload: true})
+    const climate = await fetch(`/api/openai?prompt=${initialResult}&type=CLIMATE`)
+    const dataClimate = await climate.json()
+    console.log(dataClimate)
+    const climateResult = dataClimate.data.choices[0].text
+    dispatch({type: 'SET_LOADING', payload: false})
+
+    dispatch({type: 'SET_LOADING', payload: true})
+    const cleanLikes = state?.likedRecipes.map((recipe) => recipe.split('-')[0]).join(', \n')
+    const personality = await fetch(`/api/openai?prompt=${cleanLikes}}&type=PERSONALITY`)
+    const dataPersonality = await personality.json()
+    const personalityResult = dataPersonality.data.choices[0].text
+
+    const personal = await fetch(`/api/openai?prompt=${initialResult}&type=PERSONAL&method=${personalityResult}`)
+    const dataPersonal = await personal.json()
+    console.log(dataPersonal)
+    const personalResult = dataPersonal.data.choices[0].text
+    console.log(personalResult)
+    dispatch({type: 'SET_LOADING', payload: false})
+
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
   <Card>
+    <Stack spacing={2}>
     <FormControl>
       <FormLabel>Ingredients</FormLabel>
-      <Textarea variant="outlined" color="info" minRows={16} placeholder={test2} name="instructions" required />
+      <Textarea variant="outlined" color="info" minRows={16} placeholder={test2} name="ingredients" required />
     </FormControl>
     <FormControl>
       <FormLabel>Method</FormLabel>
@@ -43,9 +83,10 @@ const GenerateForm = () => {
         })}
       </Select>
     </FormControl>
-  <Button type="submit" variant="solid" color="info" endIcon={<LocalDiningOutlinedIcon />}>
+  <Button type="submit" variant="solid" color="info" startDecorator={<LocalDiningOutlinedIcon />}>
     Submit
   </Button>
+    </Stack>
   </Card>
     </form>
   )

@@ -2,7 +2,7 @@ import {Tabs, TabList, Tab, TabPanel} from '@mui/joy'
 import FoodDisplay from '@/components/FoodDisplay'
 import AddDisplay from './AddDisplay'
 import Alert from '@/components/Alert'
-import GenerateForm from '@/components/GenerateForm'
+import GenerateDisplay from '@/components/GenerateDisplay'
 
 const NavTabs = () => {
   return (
@@ -18,7 +18,7 @@ const NavTabs = () => {
     <FoodDisplay />
   </TabPanel>
   <TabPanel value={1} sx={{ p: 2 }}>
-    <GenerateForm />
+    <GenerateDisplay />
   </TabPanel>
   <TabPanel value={2} sx={{ p: 2 }}>
     <AddDisplay />

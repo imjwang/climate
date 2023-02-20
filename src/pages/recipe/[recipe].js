@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { Sheet, Typography, IconButton, Stack, Divider, Card } from "@mui/joy"
+import { Sheet, Typography, IconButton, Chip, Stack, Divider, Card } from "@mui/joy"
 import HeroLayout from "@/components/HeroLayout"
 import { Favorite } from "@mui/icons-material"
 import { useState, useEffect, useContext } from "react"
@@ -76,6 +76,10 @@ const RecipePage = () => {
       <Typography level="h2" fontWeight="lg" sx={{cursor:"default", userSelect:"none"}}>{current?.name}</Typography>
       <Divider orientation="vertical" sx={{cursor:"default", userSelect:"none"}}>by</Divider>
       <Typography level="h4" sx={{pt:8, cursor:"default", userSelect:"none"}}>{current?.author}</Typography>
+    </Stack>
+    <Stack direction="row" spacing={1}>
+      <Chip variant="solid" color="success" size="sm" sx={{width: "min-content"}}>{current?.method}</Chip>
+      {current?.ai && <Chip variant="soft" color="info" size="sm" sx={{width: "min-content"}}>ai</Chip>}
     </Stack>
       </Card>
       <Stack spacing={2} sx={{mt:-8}}>
