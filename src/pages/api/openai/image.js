@@ -10,6 +10,7 @@ const imageGen = async (prompt) => {
   try {
     const response = await openai.createImage({
       prompt: prompt,
+      response_format: "b64_json"
     })
 
     console.log(response.data)

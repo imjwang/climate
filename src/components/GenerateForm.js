@@ -1,12 +1,13 @@
 import { Card, FormControl, Stack, Textarea, FormLabel, Select, Button, Option} from "@mui/joy"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
 import { FirestoreContext, createRecipe } from "@/context/firestoreStore";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import AlertContext from "@/context/alertContext";
 import party from 'party-js'
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import Link from "next/link";
-import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import { storage } from "@/utils/firebase";
+import {ref, uploadBytes, getDownloadURL, uploadString} from "firebase/storage";
 
 const ingredientsPlaceholder = `8 dried guajillo chiles, rinsed, stems and seeds removed
 3 dried chile de arbol chiles, rinsed, stems removed
@@ -22,6 +23,7 @@ salt and pepper, to taste
 const methodTypes = ["bake", "grill", "stir fry", "boil", "steam", "deep fry"]
 
 const GenerateForm = () => {
+  const partyRef = useRef(null)
   const {state, dispatch} = useContext(FirestoreContext)
   const {setAlert} = useContext(AlertContext)
 
@@ -87,42 +89,42 @@ const GenerateForm = () => {
     const climateImgData = await climateDalleRes.json()
     const personalImgData = await personalDalleRes.json()
     // dispatch({type: 'SET_LOADING', payload: false})
+    
+
+    const initialImg = initialImgData.data.data[0].b64_json
+    const climateImg = climateImgData.data.data[0].b64_json
+    const personalImg = personalImgData.data.data[0].b64_json
 
 
-    const initialImg = initialImgData.data.data[0].url
-    const climateImg = climateImgData.data.data[0].url
-    const personalImg = personalImgData.data.data[0].url
-
-
-    // TODO add to firestore then reroute to resultspage
-    console.log(initialImg)
-    console.log(climateImg)
-    console.log(personalImg)
     const metadata = {
       contentType: 'image/png',
     }
 
-    const ifetch = await fetch(initialImg)
-    const iblob = await ifetch.blob()
+    // const ifetch = await fetch(`/api/test?url=${initialImg}`)
+    // const iblob = await ifetch.json()
+    // console.log(iblob)
 
-    const cfetch = await fetch(climateImg)
-    const cblob = await cfetch.blob()
+    // const cfetch = await fetch(climateImg)
+    // const cblob = await cfetch.blob()
 
-    const pfetch = await fetch(personalImg)
-    const pblob = await pfetch.blob()
+    // const pfetch = await fetch(personalImg)
+    // const pblob = await pfetch.blob()
 
     const thisIsSecureHash = Date.now()
     
-    const istorageRef = ref(storage, `images/${thisIsSecureHash}-${dalleResult.trim()}`)
-    await uploadBytes(istorageRef, iblob, metadata)
+    const istorageRef = ref(storage, `images/${thisIsSecureHash}-${dalleResult.trim()}.png`)
+    await uploadString(istorageRef, initialImg, 'base64', metadata)
+    // await uploadBytes(istorageRef, iblob, metadata)
     const iurl = await getDownloadURL(istorageRef)
 
-    const cstorageRef = ref(storage, `images/${thisIsSecureHash + 1}-${climateDalleResult.trim()}`)
-    await uploadBytes(cstorageRef, cblob, metadata)
+    const cstorageRef = ref(storage, `images/${thisIsSecureHash + 1}-${climateDalleResult.trim()}.png`)
+    await uploadString(cstorageRef, climateImg, 'base64', metadata)
+    // await uploadBytes(cstorageRef, cblob, metadata)
     const curl = await getDownloadURL(cstorageRef)
 
-    const pstorageRef = ref(storage, `images/${thisIsSecureHash + 2}-${personalDalleResult.trim()}`)
-    await uploadBytes(pstorageRef, pblob, metadata)
+    const pstorageRef = ref(storage, `images/${thisIsSecureHash + 2}-${personalDalleResult.trim()}.png`)
+    await uploadString(pstorageRef, personalImg, 'base64', metadata)
+    // await uploadBytes(pstorageRef, pblob, metadata)
     const purl = await getDownloadURL(pstorageRef)
 
     
@@ -180,7 +182,7 @@ const GenerateForm = () => {
       {state?.celebrate && 
       <>
       <Button
-      onClick={(e) => party.confetti(e.target, { count: 200 })}
+      onClick={() => party.confetti(partyRef.current, { count: 200 })}
       startDecorator={<CelebrationIcon />}
       endDecorator={<CelebrationIcon />}
       >
@@ -188,7 +190,7 @@ const GenerateForm = () => {
       </Button>
       </>
       }
-  <Card>
+  <Card ref={partyRef}>
     <Stack spacing={2}>
     <FormControl>
       <FormLabel>Ingredients</FormLabel>
