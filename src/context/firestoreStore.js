@@ -12,6 +12,7 @@ const initialState = {
   traits: [],
   loading: false,
   celebrate: false,
+  recipeDisplay: []
 }
 
 const getUser = async (uid) => {
@@ -58,6 +59,8 @@ const firestoreReducer = (state, action) => {
       return {...state}
     case 'SHOW_BUTTON':
       return {...state, celebrate: action.payload}
+    case 'RECIPE_DISPLAY':
+      return {...state, recipeDisplay: action.payload}
     default:
       return state
   }

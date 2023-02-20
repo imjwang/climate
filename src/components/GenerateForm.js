@@ -1,4 +1,4 @@
-import { Card, FormControl, Stack, Textarea, FormLabel, Select, Button, Option} from "@mui/joy"
+import { Card, FormControl, Stack, Typography, Textarea, FormLabel, Select, Button, Option} from "@mui/joy"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
 import { FirestoreContext, createRecipe } from "@/context/firestoreStore";
 import { useContext, useRef } from "react";
@@ -27,6 +27,11 @@ const GenerateForm = () => {
   const {state, dispatch} = useContext(FirestoreContext)
   const {setAlert} = useContext(AlertContext)
 
+  const handleReset = () => {
+    dispatch({type: 'SHOW_BUTTON', payload: false})
+    dispatch({type: 'RECIPE_DISPLAY', payload: []})
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const {ingredients, method} = e.target
@@ -38,7 +43,8 @@ const GenerateForm = () => {
 
     dispatch({type: 'SET_LOADING', payload: true})
     const initial = await fetch(`/api/openai?prompt=${ingredients.value}&type=INITIAL&method=${method[1].value}`)
-    const data = await initial.json()
+    
+    const data = await initial.json()    
     const initialResult = data.data.choices[0].text
     console.log(initialResult)
     const initialDalle = await fetch(`/api/openai?prompt=${ingredients.value}
@@ -50,7 +56,9 @@ const GenerateForm = () => {
     
     // dispatch({type: 'SET_LOADING', payload: true})
     const climate = await fetch(`/api/openai?prompt=${initialResult}&type=CLIMATE&method=${ingredients.value}`)
-    const dataClimate = await climate.json()
+    
+      const dataClimate = await climate.json()
+    
     const climateResult = dataClimate.data.choices[0].text
     const [climateIngredients, climateInstructions] = climateResult.split('Instructions:')
     console.log(climateResult)
@@ -70,7 +78,8 @@ const GenerateForm = () => {
     console.log(personalityResult)
 
     const personal = await fetch(`/api/openai?prompt=${climateResult}&type=PERSONAL&method=${personalityResult}`)
-    const dataPersonal = await personal.json()
+      const dataPersonal = await personal.json()
+    
     const personalResult = dataPersonal.data.choices[0].text
     const [personalIngredients, personalInstructions] = personalResult.split('Instructions:')
     console.log(personalResult)
@@ -99,16 +108,6 @@ const GenerateForm = () => {
     const metadata = {
       contentType: 'image/png',
     }
-
-    // const ifetch = await fetch(`/api/test?url=${initialImg}`)
-    // const iblob = await ifetch.json()
-    // console.log(iblob)
-
-    // const cfetch = await fetch(climateImg)
-    // const cblob = await cfetch.blob()
-
-    // const pfetch = await fetch(personalImg)
-    // const pblob = await pfetch.blob()
 
     const thisIsSecureHash = Date.now()
     
@@ -169,10 +168,12 @@ const GenerateForm = () => {
 
     dispatch({type: 'SET_LOADING', payload: false})
     dispatch({type: 'SHOW_BUTTON', payload: true})
+
+    dispatch({type: 'RECIPE_DISPLAY', payload: [dalleResult.trim(), climateDalleResult.trim(), personalDalleResult.trim()]})
     
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    setAlert("success", "Your recipes are available in the Explore page please enjoy this button")
+    setAlert("success", "Your recipes are available in the Explore page!! please enjoy this button!")
 }
 
   }
@@ -188,6 +189,14 @@ const GenerateForm = () => {
       >
         CELEBRATE
       </Button>
+      <Typography level="h1">Look for:</Typography>
+      {state?.recipeDisplay.map((recipe) => {
+        return (
+          <Typography key={recipe} level="body1">{recipe}</Typography>
+        )
+      })
+       }
+      <Button variant="soft" color="info" onClick={handleReset}>Reset</Button>
       </>
       }
   <Card ref={partyRef}>
