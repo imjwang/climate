@@ -3,7 +3,7 @@ import TripleIconDup from "@/components/TripleIconDuplicate"
 
 const Solution = () => {
   return (
-    <Sheet variant="outlined" color="neutral" sx={{px: {md:14}, py: {md:10}, height: {xs: "400vh", md: "300vh"}}}>
+    <Sheet variant="outlined" color="neutral" sx={{px: {md:14}, py: {md:10}, height: {xs: "500vh", md: "300vh"}}}>
       <Stack spacing={2}>
     <Typography color="primary" level="display2">
       solution

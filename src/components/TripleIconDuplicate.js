@@ -10,21 +10,22 @@ const policyTest = `Incorporate incentives directly to the end user.`
 
 const TripleIconDup = () => {
   return (
-    <Sheet variant="soft" color="grey" sx={{px: {md:14}, py: {md:20}, height: "80vh"}}>
+    <Sheet variant="soft" color="grey" sx={{px: {md:14}, py: {md:20}, height: {xs:"200vh" ,md:"80vh"}}}>
       <Stack direction={{xs: "column", md: "row"}}
         divider={<Divider orientation="vertical" />}
         spacing={2}
         justifyContent={"space-around"}
+        alignContent={"center"}
         sx={{width: "100%", height: "100%"}}
         >
       <Icon title="Advanced AI" description={aiText}>
-        <PsychologyIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+        <PsychologyIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       <Icon title="Analytics" description={analyticsTest}>
-        <AnalyticsIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+        <AnalyticsIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       <Icon title="Incentives" description={policyTest}>
-      <MonetizationOnIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+      <MonetizationOnIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       </Stack>
     </Sheet>

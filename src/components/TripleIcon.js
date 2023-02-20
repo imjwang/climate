@@ -10,21 +10,22 @@ const wellnessText = `Promoting mindful and healthy lives through food.`
 
 const TripleIcon = () => {
   return (
-    <Sheet variant="soft" color="warning" sx={{px: {md:14}, py: {md:20}, height: "80vh"}}>
+    <Sheet variant="soft" color="warning" sx={{px: {md:14}, py: {md:20}, height: {xs:"200vh" ,md:"80vh"}}}>
       <Stack direction={{xs: "column", md: "row"}}
         divider={<Divider orientation="vertical" />}
         spacing={2}
-        justifyContent={"space-around"}
+        justifyContent={{xs: "center",md: "space-around"}}
+        alignContent={"center"}
         sx={{width: "100%", height: "100%"}}
         >
       <Icon title="Climate" description={climateText}>
-        <ForestIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+        <ForestIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       <Icon title="Animal Welfare" description={animalWelfareText}>
-        <PetsIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+        <PetsIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       <Icon title="Wellness" description={wellnessText}>
-      <SelfImprovementIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
+      <SelfImprovementIcon sx={{fontSize: 140, alignSelf: "center"}} />
       </Icon>
       </Stack>
     </Sheet>
