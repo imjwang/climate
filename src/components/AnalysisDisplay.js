@@ -8,7 +8,7 @@ const AnalysisPage = () => {
 
   useEffect(() => {
     const getPersonality = async () => {
-      const cleanLikes = state?.likedRecipes.map((recipe) => recipe.split('-')[0]).join(', \n')
+      const cleanLikes = state?.likedRecipes?.map((recipe) => recipe.split('-')[0]).join(', \n')
       const personality = await fetch(`/api/openai?prompt=${cleanLikes}}&type=PERSONALITY`)
       const dataPersonality = await personality.json()
       const personalityResult = dataPersonality.data.choices[0].text
@@ -16,6 +16,13 @@ const AnalysisPage = () => {
     }
     getPersonality()
   }, [])
+  if (!state?.authenticated) {
+    return (
+      <Typography level="h1">
+        You must be logged in to use this feature 😔😟😩😭😖💔 
+      </Typography>
+  )
+    }
 
   return (
     <Sheet>

@@ -8,7 +8,7 @@ const GenerateDisplay = () =>
   const { state } = useContext(FirestoreContext)
   
   if (state.loading) return (
-    <Sheet color="warning" sx={{ px: 10 }}>
+    <Sheet color="warning" sx={{ px: {md:10} }}>
       <CircularProgress size="lg" variant="plain" sx={{ '--CircularProgress-size': '100px' }} />
     </Sheet>
 
@@ -16,7 +16,7 @@ const GenerateDisplay = () =>
 
   return (
     <>
-      <Sheet color="warning" sx={{ px: 10 }}>
+      <Sheet color="warning" sx={{ px: {md:10} }}>
         {state?.celebrate ? 
         <>
         <Typography color="inherit" level="h1" sx={{pt:2}}>success!</Typography>

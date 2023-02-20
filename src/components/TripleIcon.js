@@ -18,13 +18,13 @@ const TripleIcon = () => {
         sx={{width: "100%", height: "100%"}}
         >
       <Icon title="Climate" description={climateText}>
-        <ForestIcon sx={{fontSize: 140, alignSelf: "center"}} />
+        <ForestIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       <Icon title="Animal Welfare" description={animalWelfareText}>
-        <PetsIcon sx={{fontSize: 140, alignSelf: "center"}} />
+        <PetsIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       <Icon title="Wellness" description={wellnessText}>
-      <SelfImprovementIcon sx={{fontSize: 140, alignSelf: "center"}} />
+      <SelfImprovementIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       </Stack>
     </Sheet>

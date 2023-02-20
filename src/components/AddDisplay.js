@@ -8,7 +8,7 @@ const AddDisplay = () =>
   const { state } = useContext(FirestoreContext)
   
   if (state.loading) return (
-    <Sheet color="warning" sx={{ px: 10 }}>
+    <Sheet color="warning" sx={{ px: {md:10} }}>
       <CircularProgress size="lg" variant="plain" sx={{ '--CircularProgress-size': '100px' }} />
     </Sheet>
 
@@ -16,7 +16,7 @@ const AddDisplay = () =>
 
   return (
     <>
-      <Sheet color="warning" sx={{ px: 10 }}>
+      <Sheet color="warning" sx={{ px: {md:10} }}>
       <Typography color="inherit" level="h1" sx={{pt:2}}>hi welcome to adding recipe </Typography>
         <Typography color="inherit" sx={{pt:2}}>You can add a recipe by filling out the form.</Typography>
         <Typography color="inherit" sx={{pb:2}}>Optionally, you may upload an image.</Typography>

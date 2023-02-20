@@ -18,13 +18,13 @@ const TripleIconDup = () => {
         sx={{width: "100%", height: "100%"}}
         >
       <Icon title="Advanced AI" description={aiText}>
-        <PsychologyIcon sx={{fontSize: 140, alignSelf: "center"}} />
+        <PsychologyIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       <Icon title="Analytics" description={analyticsTest}>
-        <AnalyticsIcon sx={{fontSize: 140, alignSelf: "center"}} />
+        <AnalyticsIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       <Icon title="Incentives" description={policyTest}>
-      <MonetizationOnIcon sx={{fontSize: 140, alignSelf: "center"}} />
+      <MonetizationOnIcon sx={{fontSize: {xs:70,  md:140}, alignSelf: "center"}} />
       </Icon>
       </Stack>
     </Sheet>

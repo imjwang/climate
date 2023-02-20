@@ -75,10 +75,10 @@ const RecipeForm = () => {
         width: "80%",
         height: "100%",
         mx: "auto", // margin left & right
-        mb: 12, // margin top & botom
-        mt: 4,
-        py: 3, // padding top & bottom
-        px: 8, // padding left & right
+        mb: {md:12}, // margin top & botom
+        mt: {md:4},
+        py: {md:3}, // padding top & bottom
+        px: {md:8}, // padding left & right
         boxShadow: "md"
       }}
     >

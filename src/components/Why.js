@@ -3,13 +3,13 @@ import Osadhi from "@/components/Osadhi"
 
 const Why = () => {
   return (
-    <Sheet sx={{pl: 6, py: 6, height: "300vh", bgcolor: "black"}}>
+    <Sheet sx={{pl: {md:6}, py: {md:6}, height: {xs: "350vh", md:"300vh"}, bgcolor: "black"}}>
     <Typography level="display2" color="info">
       why
     </Typography>
-    <Sheet sx={{my: 6, ml: 8, px:3, py:4, height: "160vh", width: "fit", bgcolor: "paleturquoise" }}>
+    <Sheet sx={{my: {md: 6}, ml: {md: 8}, px: {md:3}, py: {md:4}, height: "160vh", width: "fit", bgcolor: "paleturquoise" }}>
       <Stack direction={{xs: "column", md: "row"}} spacing={2}>
-      <Card sx={{px: 4, py: 4, width: "47%"}}>
+      <Card sx={{px: {md:4}, py: {md:4}, width: {md: "47%", xs: "96%"}}}>
         <Osadhi />
         <Typography level="body1" color="success">
         <Typography color="success" variant="soft">Oṣadhi (ओषधि):</Typography> In the Ṛgveda plants (oṣadhi) are personified as divine and a whole and 
@@ -22,7 +22,7 @@ const Why = () => {
         Source: Google Books: Cultural History from the Vāyu Purāna
         </Typography>
       </Card>
-      <Card color="primary" sx={{my:2, width: "47%"}}>
+      <Card color="primary" sx={{my:2, width: {md: "47%", xs: "96%"}}}>
         <Typography level="h1" color="info">
           The Inspiration
         </Typography>
@@ -61,7 +61,7 @@ const Why = () => {
         <Typography level="h1" color="info">
           The Cost...
         </Typography>
-        <Stack direction="row" sx={{mt:2}}>
+        <Stack direction={{xs: "column", md: "row"}} sx={{mt:2}}>
         <Typography level="display1" color="danger">14.5%</Typography>
         <Divider orientation="vertical" sx={{mx : 2}} />
         <Typography level="h4">

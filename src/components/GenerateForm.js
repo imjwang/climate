@@ -57,7 +57,7 @@ const GenerateForm = () => {
     // dispatch({type: 'SET_LOADING', payload: true})
     const climate = await fetch(`/api/openai?prompt=${initialResult}&type=CLIMATE&method=${ingredients.value}`)
     
-      const dataClimate = await climate.json()
+    const dataClimate = await climate.json()
     
     const climateResult = dataClimate.data.choices[0].text
     const [climateIngredients, climateInstructions] = climateResult.split('Instructions:')
