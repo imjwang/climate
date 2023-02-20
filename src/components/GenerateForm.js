@@ -6,6 +6,7 @@ import AlertContext from "@/context/alertContext";
 import party from 'party-js'
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import Link from "next/link";
+import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 
 const ingredientsPlaceholder = `8 dried guajillo chiles, rinsed, stems and seeds removed
 3 dried chile de arbol chiles, rinsed, stems removed
@@ -97,13 +98,38 @@ const GenerateForm = () => {
     console.log(initialImg)
     console.log(climateImg)
     console.log(personalImg)
+    const metadata = {
+      contentType: 'image/png',
+    }
+
+    const ifetch = await fetch(initialImg)
+    const iblob = await ifetch.blob()
+
+    const cfetch = await fetch(climateImg)
+    const cblob = await cfetch.blob()
+
+    const pfetch = await fetch(personalImg)
+    const pblob = await pfetch.blob()
 
     const thisIsSecureHash = Date.now()
+    
+    const istorageRef = ref(storage, `images/${thisIsSecureHash}-${dalleResult.trim()}`)
+    await uploadBytes(istorageRef, iblob, metadata)
+    const iurl = await getDownloadURL(istorageRef)
+
+    const cstorageRef = ref(storage, `images/${thisIsSecureHash + 1}-${climateDalleResult.trim()}`)
+    await uploadBytes(cstorageRef, cblob, metadata)
+    const curl = await getDownloadURL(cstorageRef)
+
+    const pstorageRef = ref(storage, `images/${thisIsSecureHash + 2}-${personalDalleResult.trim()}`)
+    await uploadBytes(pstorageRef, pblob, metadata)
+    const purl = await getDownloadURL(pstorageRef)
+
     
     const initialRecipe = {
       ai: true,
       author: `${state.username}`,
-      image: initialImg,
+      image: iurl,
       ingredients: ingredients.value,
       instructions: initialResult.trim(),
       method: method[1].value,
@@ -114,7 +140,7 @@ const GenerateForm = () => {
   const climateRecipe = {
     ai: true,
     author: `${state.username}`,
-    image: climateImg,
+    image: curl,
     ingredients: climateIngredients.trim(),
     instructions: climateInstructions.trim(),
     method: method[1].value,
@@ -125,7 +151,7 @@ const GenerateForm = () => {
   const personalRecipe = {
     ai: true,
     author: `${state.username}`,
-    image: personalImg,
+    image: purl,
     ingredients: personalIngredients.trim(),
     instructions: personalInstructions.trim(),
     method: method[1].value,
