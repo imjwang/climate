@@ -11,7 +11,7 @@ const wellnessText = `Promoting mindful and healthy lives through food.`
 const TripleIcon = () => {
   return (
     <Sheet variant="soft" color="warning" sx={{px: {md:14}, py: {md:20}, height: "80vh"}}>
-      <Stack direction="row" 
+      <Stack direction={{xs: "column", md: "row"}}
         divider={<Divider orientation="vertical" />}
         spacing={2}
         justifyContent={"space-around"}
