@@ -59,7 +59,6 @@ const textCompletion = async (prompt) => {
       temperature: 0.3,
       max_tokens: 400,
     })
-    console.log(response.data.choices[0].text)
     return response?.data
   } catch (error) {
     if (error.response) {
