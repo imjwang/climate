@@ -5,6 +5,7 @@ import { storage } from "@/utils/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { FirestoreContext, createRecipe } from "@/context/firestoreStore"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
+import AlertContext from "@/context/alertContext"
 
 //TODO set these
 const methodTypes = ["bake", "grill", "fry", "boil", "steam"]
@@ -36,11 +37,13 @@ const RecipeForm = () => {
   const { state, dispatch } = useContext(FirestoreContext)
   const [image, setImage] = useState(null)
   const formRef = useRef()
+  const {setAlert} = useContext(AlertContext)
   
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!state.authenticated) {
-      dispatch({type: 'DISPATCH_ALERT', payload: { type: "error", message: 'You must be logged in to submit a recipe'}})
+      setAlert("danger", "You must be logged in to submit a recipe")
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       const superSecureHash = Date.now()
   
@@ -65,7 +68,8 @@ const RecipeForm = () => {
       await createRecipe({...recipe, image: url})
       
       dispatch({type: 'SET_LOADING', payload: false})
-      dispatch({type: 'DISPATCH_ALERT', payload: { type: "success", message: 'Recipe submitted successfully'}})
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setAlert("success", "Recipe submitted successfully")
     }
 
   }

@@ -5,11 +5,12 @@ import { Favorite } from "@mui/icons-material"
 import { useState, useEffect, useContext } from "react"
 import { FirestoreContext, addLike, removeLike } from "@/context/firestoreStore"
 import useRecipes from "@/hooks/recipeSwr"
-
+import AlertContext from "@/context/alertContext"
 
 const RecipePage = () => {
   const {query: {recipe}} = useRouter()
   const {state, dispatch} = useContext(FirestoreContext)
+  const {setAlert} = useContext(AlertContext)
   
   const {data, isLoading} = useRecipes()
 
@@ -20,7 +21,7 @@ const RecipePage = () => {
 
   const handleLike = async () => {
     if (!state.authenticated) {
-      dispatch({type: 'DISPATCH_ALERT', payload: {type: "error", message: 'You must be logged in to like a recipe'}})
+      setAlert("danger", "You must be logged in to like a recipe")
       return
     }
     // extra safety to go along with disabled button
@@ -69,14 +70,15 @@ const RecipePage = () => {
         </IconButton>
     </HeroLayout>
     <Sheet variant="outlined" color="primary" sx={{ px: 2, py: 1, bgcolor: "white"}}>
-      <Card variant="outlined" color="primary" sx={{width:"450px", height:"180px", pt:4, my:2}}>
+      <Card variant="outlined" color="primary" sx={{width:"450px", height:"180px", transform: 'translateY(-50%)',
+  }}>
     <Stack spacing={2} direction="row">
       <Typography level="h2" fontWeight="lg" sx={{cursor:"default", userSelect:"none"}}>{current?.name}</Typography>
       <Divider orientation="vertical" sx={{cursor:"default", userSelect:"none"}}>by</Divider>
       <Typography level="h4" sx={{pt:8, cursor:"default", userSelect:"none"}}>{current?.author}</Typography>
     </Stack>
       </Card>
-      <Stack spacing={2}>
+      <Stack spacing={2} sx={{mt:-8}}>
       <Sheet variant="soft" color="info" sx={{px:2, py:2}}>
       <Typography level="h3">Ingredients</Typography>
       <Typography sx={{whiteSpace: "pre-wrap"}}>{current?.ingredients}</Typography>

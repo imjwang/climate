@@ -1,6 +1,6 @@
 import { Configuration, OpenAIApi } from "openai"
 
-const textCompletion = async (prompt) => {
+const imageGen = async (prompt) => {
   const configuration = new Configuration({
     apiKey: process.env.OPENAI_KEY,
   })
@@ -8,14 +8,13 @@ const textCompletion = async (prompt) => {
   const openai = new OpenAIApi(configuration)
 
   try {
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
+    const response = await openai.createImage({
       prompt: prompt,
-      temperature: 0.3,
-      max_tokens: 120,
     })
-    console.log(response.data.choices[0].text)
+
+    console.log(response.data)
     return response?.data
+    
   } catch (error) {
     if (error.response) {
       console.log(error.response.status);
@@ -26,10 +25,10 @@ const textCompletion = async (prompt) => {
 }
 }
 
-const openaiHandler = async (req, res) => {
+const imageGenHandler = async (req, res) => {
   const { query: {prompt} } = req
   try {
-    await textCompletion(prompt)
+    await imageGen(prompt)
     .then((response) => {
       return res.status(200).json({ data: response })
     })
@@ -45,8 +44,4 @@ const openaiHandler = async (req, res) => {
   }
 }
 
-// const openaiHandler = (req, res) => {
-//   return res.status(200).json({ name: `User 2304829348239` })
-// }
-
-export default openaiHandler
+export default imageGenHandler
