@@ -10,7 +10,7 @@ const policyTest = `Incorporate incentives directly to the end user.`
 
 const TripleIconDup = () => {
   return (
-    <Sheet variant="soft" color="grey" sx={{px: 14, py: 20, height: "80vh"}}>
+    <Sheet variant="soft" color="grey" sx={{px: {md:14}, py: {md:20}, height: "80vh"}}>
       <Stack direction="row" 
         divider={<Divider orientation="vertical" />}
         spacing={2}

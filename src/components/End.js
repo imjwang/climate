@@ -4,7 +4,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 const End = () => {
 return (
   <>
-  <Sheet variant="plain" sx={{px: 14, py: 20, height: "100vh", bgcolor:"black"}}>
+  <Sheet variant="plain" sx={{px: {md:14}, py: {md:20}, height: "100vh", bgcolor:"black"}}>
     <Typography level="display2" sx={{color: "white"}}>
       Oṣadhi is a platform<br/>for the future of <br/> what <Typography level="display2" sx={{color: "green"}}>fuels</Typography> humanity.
     </Typography>
