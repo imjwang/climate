@@ -15,6 +15,13 @@ const initialState = {
   recipeDisplay: []
 }
 
+const createUser = async (uid) => {
+  const ref = doc(firestore, `users/${uid}`)
+  await setDoc(ref, {
+    likedRecipes: [],
+  })
+}
+
 const getUser = async (uid) => {
   const ref = doc(firestore, `users/${uid}`)
   const docSnap = await getDoc(ref)
@@ -76,7 +83,12 @@ export const FirestoreProvider = ({children}) => {
   
   const getUserData = async (uid) => {
     const data = await getUser(uid)
-    dispatch({type: 'SET_DATA', payload: data ?? {}})
+    if (data !== undefined) {
+      dispatch({type: 'SET_DATA', payload: data})
+    }
+    else {
+      await createUser(uid)
+    }
   }
 
   useEffect(() => {
