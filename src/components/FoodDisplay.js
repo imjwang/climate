@@ -1,19 +1,19 @@
-import { Sheet, Grid } from "@mui/joy"
+import { Sheet, Grid, Button } from "@mui/joy"
 import FoodItem from "@/components/FoodItem"
 import SearchBar from "@/components/SearchBar"
 import { CircularProgress } from '@mui/joy';
-import useRecipes from '@/hooks/recipeSwr';
-
+import useRecipes from "@/hooks/recipeSwr";
 
 const FoodDisplay = () => {
-  const {data, isLoading} = useRecipes()
+  const {data, size, setSize} = useRecipes()
   
-  if (isLoading) {
+  if (!data) {
     return <CircularProgress />
   }
 
   return (
     <>
+    <Button onClick={() => setSize(size+1)}>click</Button>
     <Sheet
       variant="solid"
       sx={{
@@ -23,17 +23,19 @@ const FoodDisplay = () => {
         px: 2,
       }}
     >
-      {/* <SearchBar /> */}
       <Grid container 
       spacing={2}
       sx={{width: "100%", height: "100%"}}
       >
-      {data.map((recipe, index) => (
-        <Grid xs={12} sm={6} md={4} lg={3} key={index}>
-            <FoodItem recipe={recipe.name} url={recipe.path} image={recipe.image} name={recipe.name} author={recipe.author} />
-        </Grid>
-      ))
-      }
+        {
+          data.map(chunk => {
+            return chunk.map((recipe, index) => (
+              <Grid xs={12} sm={6} md={4} lg={3} key={index}>
+                  <FoodItem recipe={recipe.name} url={recipe.path} image={recipe.image} name={recipe.name} author={recipe.author} />
+              </Grid>
+            ))
+          })
+        }
       </Grid>
     </Sheet>
     </>

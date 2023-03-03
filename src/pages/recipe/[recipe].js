@@ -8,13 +8,15 @@ import useRecipes from "@/hooks/recipeSwr"
 import Alert from "@/components/Alert"
 import { toast } from "react-hot-toast"
 
+//need to update this to go fetch the recipe data from firestore
 const RecipePage = () => {
   const {query: {recipe}} = useRouter()
   const {state, dispatch} = useContext(FirestoreContext)
   
   const {data, isLoading} = useRecipes()
-
-  const current = data?.find(r => r.path === recipe)
+  console.log(data)
+  console.log(data?.flatten())
+  const current = data?.find(r => r.flatten().path === recipe)
 
   const like = state.likedRecipes?.includes(recipe)
 
