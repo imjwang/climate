@@ -5,12 +5,12 @@ import { Favorite } from "@mui/icons-material"
 import { useState, useEffect, useContext } from "react"
 import { FirestoreContext, addLike, removeLike } from "@/context/firestoreStore"
 import useRecipes from "@/hooks/recipeSwr"
-import AlertContext from "@/context/alertContext"
+import Alert from "@/components/Alert"
+import { toast } from "react-hot-toast"
 
 const RecipePage = () => {
   const {query: {recipe}} = useRouter()
   const {state, dispatch} = useContext(FirestoreContext)
-  const {setAlert} = useContext(AlertContext)
   
   const {data, isLoading} = useRecipes()
 
@@ -21,7 +21,7 @@ const RecipePage = () => {
 
   const handleLike = async () => {
     if (!state.authenticated) {
-      setAlert("danger", "You must be logged in to like a recipe")
+      toast(t => <Alert t msg="You must be logged in to like a recipe" color="danger" />)
       return
     }
     // extra safety to go along with disabled button

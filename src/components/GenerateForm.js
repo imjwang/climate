@@ -2,12 +2,13 @@ import { Card, FormControl, Stack, Typography, Textarea, FormLabel, Select, Butt
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
 import { FirestoreContext, createRecipe } from "@/context/firestoreStore";
 import { useContext, useRef } from "react";
-import AlertContext from "@/context/alertContext";
 import party from 'party-js'
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import Link from "next/link";
 import { storage } from "@/utils/firebase";
 import {ref, uploadBytes, getDownloadURL, uploadString} from "firebase/storage";
+import Alert from "@/components/Alert"
+import { toast } from "react-hot-toast"
 
 const ingredientsPlaceholder = `8 dried guajillo chiles, rinsed, stems and seeds removed
 3 dried chile de arbol chiles, rinsed, stems removed
@@ -25,7 +26,6 @@ const methodTypes = ["bake", "grill", "stir fry", "boil", "steam", "deep fry"]
 const GenerateForm = () => {
   const partyRef = useRef(null)
   const {state, dispatch} = useContext(FirestoreContext)
-  const {setAlert} = useContext(AlertContext)
 
   const handleReset = () => {
     dispatch({type: 'SHOW_BUTTON', payload: false})
@@ -37,7 +37,7 @@ const GenerateForm = () => {
     const {ingredients, method} = e.target
 
     if (!state.authenticated) {
-      setAlert("danger", "You must be logged in to submit a recipe")
+      toast(t => <Alert t={t} color="danger" msg="You must be logged in to submit a recipe!" />)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
 
@@ -173,7 +173,7 @@ const GenerateForm = () => {
     
 
     window.scrollTo({ top: 0, behavior: 'smooth' })
-    setAlert("success", "Your recipes are available in the Explore page!! please enjoy this button!")
+    toast(t => <Alert t color="success" msg="Your recipes are available in the Explore page!! please enjoy this button!" />)
 }
 
   }

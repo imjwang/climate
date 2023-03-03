@@ -5,7 +5,8 @@ import { storage } from "@/utils/firebase"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { FirestoreContext, createRecipe } from "@/context/firestoreStore"
 import LocalDiningOutlinedIcon from '@mui/icons-material/LocalDiningOutlined';
-import AlertContext from "@/context/alertContext"
+import Alert from "@/components/Alert"
+import { toast } from "react-hot-toast"
 
 const methodTypes = ["bake", "grill", "stir fry", "boil", "steam", "deep fry"]
 
@@ -27,12 +28,11 @@ const RecipeForm = () => {
   const { state, dispatch } = useContext(FirestoreContext)
   const [image, setImage] = useState(null)
   const formRef = useRef()
-  const {setAlert} = useContext(AlertContext)
   
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!state.authenticated) {
-      setAlert("danger", "You must be logged in to submit a recipe")
+      toast(t => <Alert t={t} color="danger" msg="You must be logged in to submit a recipe!" />)
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       const superSecureHash = Date.now()
@@ -59,7 +59,7 @@ const RecipeForm = () => {
       
       dispatch({type: 'SET_LOADING', payload: false})
       window.scrollTo({ top: 0, behavior: 'smooth' })
-      setAlert("success", "Recipe submitted successfully")
+      toast(t => <Alert t={t} color="success" msg="Recipe submitted successfully!" />)
     }
 
   }

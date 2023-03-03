@@ -1,9 +1,9 @@
 import {Tabs, TabList, Tab, TabPanel} from '@mui/joy'
 import FoodDisplay from '@/components/FoodDisplay'
 import AddDisplay from './AddDisplay'
-import Alert from '@/components/Alert'
 import GenerateDisplay from '@/components/GenerateDisplay'
 import AnalysisPage from '@/components/AnalysisDisplay'
+
 
 const NavTabs = () => {
   return (
@@ -14,7 +14,6 @@ const NavTabs = () => {
     <Tab>Create</Tab>
     <Tab>Analyze</Tab>
   </TabList>
-    <Alert />
   <TabPanel value={0} sx={{ p: 2 }}>
     <FoodDisplay />
   </TabPanel>

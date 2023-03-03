@@ -4,7 +4,8 @@ import { FirestoreContext } from "@/context/firestoreStore"
 import Image from "next/image"
 import {auth, provider} from '@/utils/firebase'
 import { signInWithPopup, signOut } from "firebase/auth";
-import AlertContext from "@/context/alertContext"
+import toast from "react-hot-toast"
+import Alert from "./Alert"
 
 
 const signIn = async () => {
@@ -23,11 +24,10 @@ const logOut = async () => {
 
 const AvatarButton = () => {
   const { state } = useContext(FirestoreContext)
-  const {setAlert} = useContext(AlertContext)
 
   const handleClick = async () => {
     await (state.authenticated ? logOut() : signIn())
-    setAlert("info", state.authenticated ? "Logged out" : "Logged in")
+    toast(t => <Alert t msg={state.authenticated ? "Logged Out" : "Logged In"} color="info" />)
   }
   
 
